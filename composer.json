@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.0.8",
         "sensio/framework-extra-bundle": "^5.0",
+        "symfony/asset": "^4.0@RC",
         "symfony/console": "^3.3",
         "symfony/framework-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
