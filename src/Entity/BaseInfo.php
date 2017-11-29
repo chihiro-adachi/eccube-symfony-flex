@@ -30,7 +30,6 @@ use Doctrine\ORM\Mapping as ORM;
  * BaseInfo
  *
  * @ORM\Table(name="dtb_base_info")
- * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="Eccube\Repository\BaseInfoRepository")
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
@@ -44,53 +43,26 @@ class BaseInfo
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="company_name", type="string", length=255, nullable=true)
      */
-    private $company_name;
+    public $company_name;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="company_kana", type="string", length=255, nullable=true)
      */
-    private $company_kana;
+    public $company_kana;
 
     /**
-     * Get companyName.
+     * @var string|null
      *
-     * @return string|null
+     * @ORM\Column(name="shop_name", type="string", length=255, nullable=true)
      */
-    public function getCompanyName()
-    {
-        return $this->company_name;
-    }
-
-    /**
-     * Set companyKana.
-     *
-     * @param string|null $companyKana
-     *
-     * @return BaseInfo
-     */
-    public function setCompanyKana($companyKana = null)
-    {
-        $this->company_kana = $companyKana;
-
-        return $this;
-    }
-
-    /**
-     * Get companyKana.
-     *
-     * @return string|null
-     */
-    public function getCompanyKana()
-    {
-        return $this->company_kana;
-    }
+    public $shop_name;
 }
