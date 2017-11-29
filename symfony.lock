@@ -77,9 +77,6 @@
     "symfony/cache": {
         "version": "v3.3.13"
     },
-    "doctrine/cache": {
-        "version": "v1.7.1"
-    },
     "symfony/framework-bundle": {
         "version": "3.3",
         "recipe": {

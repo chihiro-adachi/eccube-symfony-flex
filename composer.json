@@ -49,5 +49,6 @@
             "id": "01C03C9MNRRKHW8YWX1PAABR67",
             "allow-contrib": false
         }
-    }
+    },
+    "minimum-stability": "RC"
 }
