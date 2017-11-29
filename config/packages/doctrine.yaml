@@ -19,7 +19,7 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            App:
+            Eccube:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
