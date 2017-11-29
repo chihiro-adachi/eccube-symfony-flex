@@ -178,5 +178,20 @@
             "version": "4.0",
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
+    },
+    "twig/twig": {
+        "version": "v2.4.4"
+    },
+    "symfony/twig-bridge": {
+        "version": "v4.0.0-rc2"
+    },
+    "symfony/twig-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "f75ac166398e107796ca94cc57fa1edaa06ec47f"
+        }
     }
 }

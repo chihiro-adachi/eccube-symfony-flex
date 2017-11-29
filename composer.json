@@ -7,6 +7,7 @@
         "symfony/console": "^3.3",
         "symfony/framework-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
+        "symfony/twig-bundle": "^4.0@RC",
         "symfony/yaml": "^3.3"
     },
     "require-dev": {
