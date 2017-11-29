@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Eccube\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Eccube\\Tests\\": "tests/"
         }
     },
     "scripts": {
