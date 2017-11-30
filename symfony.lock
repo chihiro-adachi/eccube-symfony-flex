@@ -226,5 +226,53 @@
             "version": "2.5",
             "ref": "8daf8ede72274989fb0dc66b83cb4bc1693afbb9"
         }
+    },
+    "symfony/polyfill-php72": {
+        "version": "v1.6.0"
+    },
+    "symfony/var-dumper": {
+        "version": "v4.0.0-rc2"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "76589c0e33dbcc40151109d134a14f141ff2eeba"
+        }
+    },
+    "symfony/web-profiler-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "6bdfa1a95f6b2e677ab985cd1af2eae35d62e0f6"
+        }
+    },
+    "symfony/profiler-pack": {
+        "version": "v1.0.2"
+    },
+    "easycorp/easy-log-handler": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
+        }
+    },
+    "symfony/debug-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "de31e687f3964939abd1f66817bd96ed34bc2eee"
+        }
+    },
+    "symfony/debug-pack": {
+        "version": "v1.0.3"
     }
 }
