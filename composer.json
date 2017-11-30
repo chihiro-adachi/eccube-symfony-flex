@@ -7,6 +7,7 @@
         "symfony/asset": "^4.0@RC",
         "symfony/console": "^3.3",
         "symfony/debug-pack": "^1.0",
+        "symfony/form": "^4.0@RC",
         "symfony/framework-bundle": "^3.3",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "^1.0",

@@ -274,5 +274,23 @@
     },
     "symfony/debug-pack": {
         "version": "v1.0.3"
+    },
+    "symfony/inflector": {
+        "version": "v4.0.0-rc2"
+    },
+    "symfony/property-access": {
+        "version": "v4.0.0-rc2"
+    },
+    "symfony/options-resolver": {
+        "version": "v4.0.0-rc2"
+    },
+    "symfony/intl": {
+        "version": "v4.0.0-rc2"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.6.0"
+    },
+    "symfony/form": {
+        "version": "v4.0.0-rc2"
     }
 }
