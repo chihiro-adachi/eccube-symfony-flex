@@ -109,4 +109,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
             <div class="item"><img src="{{ asset('assets/img/mv03.jpg') }}"></div>
         </div>
     </div>
+    <div>
+        {% for message in app.flashes('message') %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {{ form_start(form) }}
+    {{ form_row(form) }}
+    <button type="submit">登録</button>
+    {{ form_end(form) }}
 {% endblock %}

@@ -4,19 +4,54 @@ namespace Eccube\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Eccube\Entity\BaseInfo;
+use Eccube\Form\Type\BaseInfoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class IndexController extends Controller
 {
     /**
+     * @var EntityManagerInterface
+     */
+    protected $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
+    /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(EntityManagerInterface $em)
+    public function indexAction(Request $request)
     {
-        // レポジトリの取得サンプル
-        $BaseInfo = $em->getRepository(BaseInfo::class)->find(1);
 
+        // レポジトリの取得サンプル
+        $BaseInfo = $this->em->getRepository(BaseInfo::class)->find(1);
+
+        $form = $this->createForm(BaseInfoType::class, $BaseInfo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $BaseInfo = $form->getData();
+            $this->em->persist($BaseInfo);
+            $this->em->flush();
+
+            //$this->addFlash('message', '登録しました。');
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('index.html.twig', [
+            'form' => $form->createView(),
+            'BaseInfo' => $BaseInfo,
+            'Page' => $this->createPage(),
+        ]);
+    }
+
+    private function createPage() {
         // ダミーの値
         $Page = new \stdClass();
         $Page->author = null;
@@ -34,9 +69,6 @@ class IndexController extends Controller
         $Page->ContentsBottom = null;
         $Page->Footer = null;
 
-        return $this->render('index.html.twig', [
-            'BaseInfo' => $BaseInfo,
-            'Page' => $Page
-        ]);
+        return $Page;
     }
 }
