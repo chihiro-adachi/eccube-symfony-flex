@@ -19,6 +19,8 @@ class IndexController extends Controller
 
     public function __construct(EntityManagerInterface $em)
     {
+        // $this->getDoctrine()でよい
+        // コンストラクタインジェクションのサンプルとして
         $this->em = $em;
     }
 
