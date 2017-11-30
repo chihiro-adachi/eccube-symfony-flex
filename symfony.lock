@@ -304,5 +304,17 @@
     },
     "symfony/validator": {
         "version": "v4.0.0-rc2"
+    },
+    "symfony/security": {
+        "version": "v4.0.0-rc2"
+    },
+    "symfony/security-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "85834af1496735f28d831489d12ab1921a875e0d"
+        }
     }
 }
