@@ -58,4 +58,9 @@ class Kernel extends BaseKernel
         }
         $routes->import($confDir.'/routes'.self::CONFIG_EXTS, '/', 'glob');
     }
+
+    public function build(ContainerBuilder $container)
+    {
+        $container->registerExtension(new EccubeExtension());
+    }
 }
