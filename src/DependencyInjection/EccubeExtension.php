@@ -1,8 +1,9 @@
 <?php
 
-namespace Eccube;
+namespace Eccube\DependencyInjection;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Configuration;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Configuration as DoctrineBundleConfiguration;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -23,33 +24,57 @@ class EccubeExtension extends Extension implements PrependExtensionInterface
      */
     public function prepend(ContainerBuilder $container)
     {
-        // doctrine.yamlの設定情報を取得
+        // TODO EC-CUBEのインストール状態のチェックを行う
+        if (!$container->hasParameter('eccube.install')) {
+            //return;
+        }
+
+        // doctrine.yml, または他のprependで差し込まれたdoctrineの設定値を取得する.
         $configs = $container->getExtensionConfig('doctrine');
 
-        // processorで正規化
-        $config = $this->processConfiguration(new Configuration(false), $configs);
+        // $configsは, env変数(%env(xxx)%)やパラメータ変数(%xxx.xxx%)がまだ解決されていないため, resolveEnvPlaceholders()で解決する
+        // @see https://github.com/symfony/symfony/issues/22456
+        $configs = $container->resolveEnvPlaceholders($configs, true);
 
-        // dbalでdbアクセス
-        $conn = \Doctrine\DBAL\DriverManager::getConnection($config['dbal']);
-        // TODO booleanの判定が必要なのでquery builderにする
-        $stmt = $conn->query('select * from dtb_plugin where enable = 1');
-        $plugins = $stmt->fetchAll();
+        // doctrine bundleのconfigurationで設定値を正規化する.
+        $configration = new DoctrineBundleConfiguration($container->getParameter('kernel.debug'));
+        $config = $this->processConfiguration($configration, $configs);
+
+        //dump($config);
+
+        // prependのタイミングではコンテナのインスタンスは利用できない.
+        // 直接dbalでdbアクセスを行う.
+        $params = $config['dbal']['connections'][$config['dbal']['default_connection']];
+        $conn = \Doctrine\DBAL\DriverManager::getConnection($params);
+
+        // TODO booleanの判定が必要なのでquery builderにする.
+//        $stmt = $conn->query('select * from dtb_plugin where plugin_enable = 1');
+//        $plugins = $stmt->fetchAll();
+
+        $plugins = [
+            [
+                'code' => 'HogePlugin',
+            ],
+        ];
 
         // mapping情報の構築
         $mappings = [];
         foreach ($plugins as $plugin) {
+            // TODO Entityディレクトリの存在チェックが必要.
             $code = $plugin['code'];
             $namespace = sprintf('Plugin\%s\Entity', $code);
             $mappings[$code] = [
                 'is_bundle' => false,
+                'type' => 'annotation',
                 'dir' => '%kernel.project_dir%/app/plugins/'.$code.'/Entity',
                 'prefix' => $namespace,
                 'alias' => $code,
             ];
         }
+
         // mapping情報の追加
         if (!empty($mappings)) {
-            $container->prependExtensionConfig('doctine', [
+            $container->prependExtensionConfig('doctrine', [
                 'orm' => [
                     'mappings' => $mappings,
                 ],
